@@ -8,8 +8,8 @@ This custom shell program, written in C, provides a basic command-line interface
 
 ### 1. Running Shell Commands
 
-- The shell supports all standard shell commands.
-- Commands can be executed with basic functionalities excpet, input/output redirection, piping, etc.
+- The shell supports all standard shell commands including piped commands.
+- Commands can be executed with basic functionalities excpet, input/output redirection, background commands with piping.
 
 ### 2. Background Command Execution
 
@@ -34,7 +34,19 @@ This custom shell program, written in C, provides a basic command-line interface
     $ grep "search_term" file.txt
     ```
     In this example, grep runs as a child process of the shell.
-### 5. Signal Handling for Long-running Commands
+
+### 5. Piped commands with inter-process communication
+
+- Given a command with "|"(pipes) for inter process communication, the shell will split the commands, and executes each command one-by-one. The shell uses file descriptors for inter process communication.
+- Each command is executed as a child process, ensuring isolation and better process management.
+- Example:
+    ```bash
+    $ echo "Hello" | wc -c
+    ```
+    In this example, the shell will return answer "8" as character counts are 8.
+
+### 6. Signal Handling for Long-running Commands
+
 - The shell handles the CTRL+C shortcut to kill long-running commands.
 - Signal handling is implemented in C to gracefully terminate the process.
 - This prevents the shell itself from being terminated and allows users to stop only the current running command.

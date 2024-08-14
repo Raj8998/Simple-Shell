@@ -1,9 +1,4 @@
-#include <sys/wait.h>
-#include <stdlib.h>
-#include  <stdio.h>
-#include <string.h>
-#include <signal.h>
-#include <setjmp.h>
+#include "handlePipeCommands.h"
 
 // variable initializations
 int MAX_BACKGROUND_PROCESSES=64;
@@ -56,17 +51,28 @@ int runCommand( char **tokens, int *background_processes){
         return 0;
     }
 
+    
+    if(!isBackgroundProcessEntered) {
+        // Check and split for pipe based commands, and run them
+        if(findPipe(tokens, 0) != -1){
+            char ***commands;
+            commands = splitCommands(tokens);
+            executePipedCommands(commands);
+            return 0;
+        }
+    }
+
     // Create a new child process for running new command
     pid_t pid = fork();
-	if(pid == 0){
+    if(pid == 0){
         if(isBackgroundProcessEntered){
             setpgid(0, 0);
-        }        
-
-		execvp(tokens[0], tokens);
-		printf("Shell: Incorrect command\n");
+        }
+        execvp(tokens[0], tokens);
+        // execvp(*tokens[index], tokens[index]);
+        printf("Shell: Incorrect command\n");
         exit(1);
-	} else{
+    } else{
         if(!isBackgroundProcessEntered){
             currentForegroundProcess = pid;
             int status;
@@ -79,7 +85,8 @@ int runCommand( char **tokens, int *background_processes){
             addNewProcessToList(background_processes, pid);
         }
         reapTerminatedBackgroundProcesses(background_processes);
-	}
+    }
+    
     return 0;
 }
 

@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "stdlib.h": "c",
+        "wait.h": "c",
+        "handlepipecommands.h": "c",
+        "runshellcommands.h": "c"
+    }
+}
