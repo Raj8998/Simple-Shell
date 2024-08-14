@@ -101,7 +101,9 @@ This custom shell program, written in C, provides a basic command-line interface
 
 ## Source Code Structure
 - **src/shell.c**: The main source file containing the shell implementation.
-- **src/run_shell_commands.h**: Header file for command execution functions.
+- **src/runShellCommands.h**: Header file for command execution functions.
+- **src/handlePipeCommands.h**: Header file for handling inter process communication with pipes.
+- **src/handleIORedirections.h**: Header file for handling IO redirections.
 - **src/tokenizer.h**: Header file for command parsing and tokenization functions.
 
 ## Compilation
