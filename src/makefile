@@ -10,7 +10,7 @@ CFLAGS = -Wall -Wformat-security -g
 SRCS = shell.c
 
 # Header files
-HEADERS = runShellCommands.h tokenizer.h handlePipeCommands.h
+HEADERS = runShellCommands.h tokenizer.h handlePipeCommands.h handleIORedirections.h
 
 # Executable name
 TARGET = shell

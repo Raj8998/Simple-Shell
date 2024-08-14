@@ -1,4 +1,4 @@
-#include "handlePipeCommands.h"
+#include "handleIORedirections.h"
 
 // variable initializations
 int MAX_BACKGROUND_PROCESSES=64;
@@ -59,6 +59,8 @@ int runCommand( char **tokens, int *background_processes){
             commands = splitCommands(tokens);
             executePipedCommands(commands);
             return 0;
+        } else if(getIORedirectType(tokens) != 0){
+            executeIOCommand(tokens);
         }
     }
 

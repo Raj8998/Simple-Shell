@@ -8,8 +8,8 @@ This custom shell program, written in C, provides a basic command-line interface
 
 ### 1. Running Shell Commands
 
-- The shell supports all standard shell commands including piped commands.
-- Commands can be executed with basic functionalities excpet, input/output redirection, background commands with piping.
+- The shell supports all standard shell commands including piped commands, and Inupt/Output redirection.
+- Commands can be executed with basic functionalities excpet, background commands and IO redirection with piping.
 
 ### 2. Background Command Execution
 
@@ -45,7 +45,25 @@ This custom shell program, written in C, provides a basic command-line interface
     ```
     In this example, the shell will return answer "8" as character counts are 8.
 
-### 6. Signal Handling for Long-running Commands
+### 6. IO Redirection
+
+- The shell handles iutput redirections like overwrite a file with ">" and append to a file with ">>" symbols.
+- The shell also handles input redirections using "<" symbol
+- Example:
+    1. Overwrite a file with ">"
+        ```bash
+        $ echo "Hello" > test.txt
+        ```
+    2. Append to a file with ">>"
+        ```bash
+        $ echo "Hello" >> test.txt
+        ```
+    2. Input redirection with "<"
+        ```bash
+        $ cat < test.txt
+        ```
+
+### 7. Signal Handling for Long-running Commands
 
 - The shell handles the CTRL+C shortcut to kill long-running commands.
 - Signal handling is implemented in C to gracefully terminate the process.
